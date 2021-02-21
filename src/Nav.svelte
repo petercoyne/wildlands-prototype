@@ -28,7 +28,11 @@
         <div><img src="../images/logo-no-text.png" alt="Logo" class="ml-12 h-16"></div>
         <div class="flex-grow grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 justify-center px-12 pb-2 max-w-full text-center uppercase text-xs font-bold">
             {#each Counties as county}
-                <a href="#/" on:click={() => updateCounty(county)} class="p-1 text-gray-500 normallink hover:bg-gray-300 rounded-md">{county}</a>
+                <a href="#/" on:click={() => updateCounty(county)} 
+                    class="p-1 text-gray-500 normallink hover:bg-gray-300 rounded-md"
+                    class:selected="{$activeCounty == county}">
+                    {county}
+                </a>
             {/each}
         </div>
     </div>
