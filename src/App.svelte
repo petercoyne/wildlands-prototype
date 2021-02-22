@@ -44,6 +44,9 @@
 					mapComponent.fitBounds(data.results);
 				}		
 			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
 		}
 	}
 	
@@ -79,5 +82,5 @@
 </div>
 <div class="block md:hidden pt-12">
 	<Logo />
-	<h1 class="text-3xl font-bold p-12 text-center">WildLands requires a minimum browser width of 768px</h1>
+	<h1 class="text-3xl font-bold p-12 text-center">WildLands requires a tablet or desktop to use</h1>
 </div>

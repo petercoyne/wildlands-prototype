@@ -37,9 +37,6 @@
 	}
 	
 	export function zoomTo(lng, lat) {
-		if (highlightMarker) {
-			highlightMarker.remove();
-		}
 		map.flyTo({
 			center: [ lng, lat ],
 			zoom: 14
@@ -47,6 +44,9 @@
 	}
 
 	export function closePlace() {
+		if (highlightMarker) {
+			highlightMarker.remove();
+		}
 		if (currentBounds) {
 			map.fitBounds(currentBounds);
 		}
@@ -56,6 +56,7 @@
 		data.forEach(result => {
 			let el = document.createElement('div');
 				el.className = 'marker border-blue-500 border-4';
+				el.title = result.name;
 				el.addEventListener('click', event => {
 					activePlace.set(result);
 					zoomTo(result.geo.longitude, result.geo.latitude);

@@ -45,13 +45,13 @@
 <div class="relative">
     {#if $activePlace}
         <div class="py-8 sticky top-0 mt-8 z-10 bg-white border-b-2">
-            <a href="#/" on:click={closePlace} class="text-red-500 float-right p-4">
+            <a href="#/" on:click={closePlace} class="text-red-500 float-right p-4 pr-0">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </a>
             <h2 class="text-3xl font-bold">{$activePlace.name}</h2>
-            <p class="">{$activePlace.address.addressLocality}</p>
+            <p class="mb-4">{$activePlace.address.addressLocality}</p>
             {#each $activePlace.tags as tag}
-                <span class="bg-gray-400 rounded p-2 mr-2 mb-2 text-xs inline-block">{tag}</span>
+                <span class="bg-gray-500 text-white font-bold rounded p-2 mr-2 mb-2 text-xs inline-block">{tag}</span>
             {/each}
         </div>
     {/if}
