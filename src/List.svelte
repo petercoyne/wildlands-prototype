@@ -1,8 +1,7 @@
 <script>
-    import { results } from './stores.js';
+    import { results, activePlace } from './stores.js';
     import { createEventDispatcher } from 'svelte';
     import Tabs from './Tabs.svelte';
-import { add_resize_listener } from 'svelte/internal';
 
 	const dispatch = createEventDispatcher();
 
@@ -17,16 +16,42 @@ import { add_resize_listener } from 'svelte/internal';
         dispatch("unhighlight");
     }
 
+    function mouseClick(place) {
+        dispatch("zoomTo", {
+			lng: place.geo.longitude,
+            lat: place.geo.latitude
+		});
+        activePlace.set(place);
+    }
+
+    function closePlace() {
+        activePlace.set(false);
+        console.log("List: closing place");
+        dispatch("closePlace");
+    }
+
 </script>
 
 <div class="overflow-y-scroll max-h-full min-h-0 relative">
-    <Tabs />
-    {#if $results}
+
+    {#if $activePlace}
+        <div class="p-8">
+            <a href="#/" on:click={closePlace} class="text-red-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </a>
+            <h2 class="text-3xl font-bold">{$activePlace.name}</h2>
+            <p class="">{$activePlace.address.addressLocality}</p>
+            {#each $activePlace.tags as tag}
+                <span class="bg-gray-400 rounded p-2 mr-2 mb-2 text-xs inline-block">{tag}</span>
+            {/each}
+        </div>
+    {:else if $results}
+        <Tabs />
         <div class="p-8">
             {#each $results as place}
-                <div on:mouseenter={() => mouseIn(place)} on:mouseleave={() => mouseOut(place)}
+                <div on:mouseenter={() => mouseIn(place)} on:mouseleave={mouseOut} on:click={() => mouseClick(place)}
                     class="mb-2 pb-2 grid grid-cols-3 border-b-2"
-                    style="grid-template-columns: 6fr 3fr 1fr">
+                    style="grid-template-columns: 6fr 4fr 1fr">
                     <div>
                         <h4 class="text-xl font-bold">{place.name}</h4>
                         <p class="">{place.address.addressLocality}</p>
@@ -44,8 +69,8 @@ import { add_resize_listener } from 'svelte/internal';
             {/each}
         </div>
     {:else}
-        <div>
-            <h2 class="text-3xl font-bold p-8">Please select a County above.</h2>
+        <div class="p-8">
+            <h2 class="text-3xl font-bold">Please select a County above.</h2>
         </div>
     {/if}
 </div>

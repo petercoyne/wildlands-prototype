@@ -51,6 +51,14 @@
 		mapComponent.removeMarker();
 	}
 
+	function zoomTo(event) {
+		mapComponent.zoomTo(event.detail.lng, event.detail.lat);
+	}
+
+	function closePlace() {
+		mapComponent.closePlace();
+	}
+
 </script>
 
 <Tailwindcss />
@@ -60,8 +68,7 @@
 		<div class="grid grid-cols-2 h-full max-h-full">
 			<Map lat={53.2734} lon={-7.7783} zoom={6} bind:this={mapComponent} />
 			<div class="flex flex-col max-h-full min-h-0">
-				
-				<List bind:this={listComponent} on:highlight={highlight} on:unhighlight={unHighlight}/>
+				<List bind:this={listComponent} on:highlight={highlight} on:unhighlight={unHighlight} on:zoomTo={zoomTo} on:closePlace={closePlace}/>
 			</div>
 		</div>
 	</div>
