@@ -6,9 +6,6 @@
 
 	const dispatch = createEventDispatcher();
 
-    let y;
-    let scrollMem = 0;
-
     function mouseIn(place) {
 		dispatch('highlight', {
 			lng: place.geo.longitude,
@@ -32,15 +29,9 @@
     function closePlace() {
         activePlace.set(false);
         dispatch("closePlace");
-        // console.log("scrolling to" + scrollMem)
-        // setTimeout(function () {
-        //     y = scrollMem;
-        // }, 1000);
     }
 
 </script>
-
-<svelte:window bind:scrollY={y}/>
 
 <div class="relative">
     {#if $activePlace}

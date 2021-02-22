@@ -1,7 +1,7 @@
 <script>
 	import { onMount, setContext, createEventDispatcher } from 'svelte';
 	import { mapbox, key } from './mapbox.js';
-	import { results, mapReady,  activePage, activeCounty, activePlace } from './stores.js';
+	import { mapReady, activePlace } from './stores.js';
 
 	const dispatch = createEventDispatcher();
 

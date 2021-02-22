@@ -11,9 +11,10 @@
 <div id="nav">
     <!-- First row -->
     <nav class="flex w-full justify-between items-center">
-        <a href="#/menu" class="p-12 text-black hover:text-blue-500 transition-colors duration-300">
+        <a href="#/menu" class="p-10 pl-12 z-10 text-black hover:text-blue-500 transition-colors duration-300 bg-white rounded-full fixed bg-opacity-80">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </a>
+        <div id="dummyitem" class="p-12 w-8"></div>
         <a href="#/" on:click={() => updateCounty(false)}>
             <Logo />
         </a>
