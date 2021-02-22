@@ -10,10 +10,6 @@
 	let mapComponent, listComponent, y;
 	let query = false;
 
-	function flyTo() {
-		mapComponent.reposition(37.8225, -122.0024, 6);
-	}
-
 	$: $activeTab, changeQuery();
 	$: $activeCounty, changeQuery();
 	
