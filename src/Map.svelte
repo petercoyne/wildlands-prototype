@@ -1,7 +1,7 @@
 <script>
 	import { onMount, setContext, createEventDispatcher } from 'svelte';
-	import { mapbox, key } from './mapbox.js';
-	import { mapReady, activePlace } from './stores.js';
+	import { mapbox, key } from './helpers/mapbox.js';
+	import { mapReady, activePlace } from './helpers/stores.js';
 
 	const dispatch = createEventDispatcher();
 
@@ -26,7 +26,7 @@
 
 	export function placeMarker(lng, lat) {
 		let el = document.createElement('div');
-		el.className = 'marker border-red-500 border-8';
+		el.className = 'marker border-red-500 border-4 rounded-full';
 		highlightMarker = new mapbox.Marker(el).setLngLat([lng, lat]).addTo(map);
 	}
 
@@ -55,15 +55,13 @@
 	export function placeMarkers(data) {
 		data.forEach(result => {
 			let el = document.createElement('div');
-				el.className = 'marker border-blue-500 border-4';
+				el.className = 'w-8 h-8 rounded-full cursor-pointer border-blue-500 border-4';
 				el.title = result.name;
 				el.addEventListener('click', event => {
 					activePlace.set(result);
 					zoomTo(result.geo.longitude, result.geo.latitude);
 				});
 			let marker = new mapbox.Marker(el).setLngLat([result.geo.longitude, result.geo.latitude]).addTo(map)
-			// .setPopup(new mapbox.Popup({ offset: 25 }) // add popups
-    		// .setHTML('<h3>' + result.name + '</h3><p>' + result.url + '</p>'));
 			markers.push(marker);
 		});
 	}

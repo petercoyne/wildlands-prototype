@@ -1,7 +1,7 @@
 <script>
     import Logo from './Logo.svelte'
-    import Counties from './counties.js'
-    import { activeCounty } from './stores.js';
+    import Counties from './helpers/counties.js'
+    import { activeCounty } from './helpers/stores.js';
 
     function updateCounty(theCounty) {
         activeCounty.set(theCounty);

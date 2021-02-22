@@ -1,5 +1,5 @@
 <script>
-    import { activeTab } from './stores.js';
+    import { activeTab } from './helpers/stores.js';
     import { slide } from 'svelte/transition';
 </script>
 <div class="sticky top-0 pt-8 max-w-full grid grid-cols-3 text-md font-bold bg-white border-gray-500 border-b-2">

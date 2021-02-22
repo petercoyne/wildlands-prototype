@@ -1,16 +1,17 @@
 <script>
+    import Tailwindcss from './helpers/Tailwindcss.svelte';
+    import { results, activeTab, activeCounty } from './helpers/stores.js'; // these are "global" variables, defined in the stores file
 	import { fade } from 'svelte/transition';
-    import Tailwindcss from './Tailwindcss.svelte';
-    import { results, activeTab, activeCounty } from './stores.js';
 	import Nav from './Nav.svelte';
 	import Map from './Map.svelte';
 	import List from './List.svelte';
 
-	let mapComponent, listComponent, y;
-	let query = false;
+	let mapComponent, listComponent; // for binding App with the Map and List
+	let y; // vertical scroll variable
+	let query = false; // this will be the url we want to get for the API stuff
 
-	$: $activeTab, changeQuery();
-	$: $activeCounty, changeQuery();
+	$: $activeTab, changeQuery(); // if someone changes the tab, we want to update the API query
+	$: $activeCounty, changeQuery(); // same if someone changes the active county
 	
 	async function changeQuery(){
 		switch($activeTab) {
@@ -28,16 +29,16 @@
 	}
 
 	async function getAPI() {
-		if (query && $activeCounty) {
-			console.log("getting API");
-			fetch(query)
-			.then(r => r.json())
+		if (query && $activeCounty) { // don't try to pull from API unless there's a valid query
+			console.log("getting API"); // just to make sure we're not making too many API calls
+			fetch(query) // fetch raw json from Failte Ireland
+			.then(r => r.json()) // convert it into javascript object
 			.then(data => {
-				mapComponent.clearMarkers();
-				if (data.hasOwnProperty('results')) {
-					mapComponent.placeMarkers(data.results);
-					results.set(data.results);
-					mapComponent.fitBounds(data.results);
+				mapComponent.clearMarkers(); // clear any markers from the map
+				if (data.hasOwnProperty('results')) { // if there's any results
+					mapComponent.placeMarkers(data.results); // pass data.results to placeMarkers() in the Map component
+					results.set(data.results); // put data.results into global variable
+					mapComponent.fitBounds(data.results); // function to zoom to cover all markers on the map
 				}		
 			})
 			.catch((error) => {
@@ -47,15 +48,15 @@
 	}
 	
 	function highlight(event) {
-		mapComponent.placeMarker(event.detail.lng, event.detail.lat)
+		mapComponent.placeMarker(event.detail.lng, event.detail.lat) // this is triggered when mouse is over one of the list items
 	}
 
 	function unHighlight() {
-		mapComponent.removeMarker();
+		mapComponent.removeMarker(); // this is triggered when the mouse leaves the list item
 	}
 
 	function zoomTo(event) {
-		mapComponent.zoomTo(event.detail.lng, event.detail.lat);
+		mapComponent.zoomTo(event.detail.lng, event.detail.lat); // triggered by click on list item, function to zoom to the item
 	}
 
 	function closePlace() {
