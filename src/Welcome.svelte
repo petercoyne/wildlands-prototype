@@ -3,6 +3,6 @@
 </script>
 
 <div class="p-8 text-center">
-    <Logo />
-    <h2 class="text-2xl mt-8">Please select a County above.</h2>
+    <h2 class="text-2xl mt-16">Welcome to WildLands.</h2>
+    <h4>Please select a County above.</h4>
 </div>

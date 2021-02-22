@@ -1,3 +1,7 @@
+body {
+  box-sizing: border-box;
+}
+
 .marker {
     width: 40px;
     height: 40px;

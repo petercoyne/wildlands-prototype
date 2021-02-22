@@ -4,6 +4,7 @@
 	import Nav from './Nav.svelte';
 	import Map from './Map.svelte';
 	import List from './List.svelte';
+	import Logo from './Logo.svelte';
 	
 	let mapComponent, listComponent;
 	let query = false;
@@ -22,6 +23,9 @@
 				break;
 			case 1:
 				query = 'https://failteireland.azure-api.net/opendata-api/v1/activities?$filter=address/addressRegion eq \'' + $activeCounty + '\'';
+				break;
+			case 2:
+				query = 'https://failteireland.azure-api.net/opendata-api/v1/attractions?$filter=address/addressRegion eq \'' + $activeCounty + '\'';
 				break;
 		}
 		getAPI();
@@ -62,14 +66,18 @@
 </script>
 
 <Tailwindcss />
-<div class="flex flex-col absolute top-0 bottom-0 left-0 right-0 max-h-full">
+<div class="hidden md:block">
 	<Nav />
-	<div class="flex-grow min-h-0">
-		<div class="grid grid-cols-2 h-full max-h-full">
+	<div class="grid grid-cols-2 gap-x-8 mx-12">
+		<div class="h-96 sticky top-8 mt-8">
 			<Map lat={53.2734} lon={-7.7783} zoom={6} bind:this={mapComponent} />
-			<div class="flex flex-col max-h-full min-h-0">
-				<List bind:this={listComponent} on:highlight={highlight} on:unhighlight={unHighlight} on:zoomTo={zoomTo} on:closePlace={closePlace}/>
-			</div>
+		</div>
+		<div class="flex-grow">
+			<List bind:this={listComponent} on:highlight={highlight} on:unhighlight={unHighlight} on:zoomTo={zoomTo} on:closePlace={closePlace}/>
 		</div>
 	</div>
+</div>
+<div class="block md:hidden pt-12">
+	<Logo />
+	<h1 class="text-3xl font-bold p-12 text-center">WildLands requires a minimum browser width of 768px</h1>
 </div>

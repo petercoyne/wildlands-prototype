@@ -7,6 +7,7 @@
 
 	function mapLoaded() {
 		$mapReady = true;
+		map.resize();
 	}
 
 	setContext(key, {
@@ -97,7 +98,7 @@
 				center: [lon, lat],
 				zoom
 			});
-			map.on('ready', mapLoaded)
+			map.on('load', mapLoaded);
 		};
 
 		document.head.appendChild(link);
@@ -118,7 +119,7 @@
 	}
 </style>
 
-<div bind:this={container} class="top-0 bottom-0">
+<div bind:this={container} class="h-96 top-0 bottom-0 rounded-xl" style="height: 24rem">
 	{#if map}
 		<slot></slot>
 	{/if}
