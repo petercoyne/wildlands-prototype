@@ -18,7 +18,6 @@
     }
 
     function mouseClick(place) {
-        scrollMem = y;
         dispatch("zoomTo", {
 			lng: place.geo.longitude,
             lat: place.geo.latitude
