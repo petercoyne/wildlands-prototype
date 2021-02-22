@@ -2,6 +2,7 @@
     import { results, activePlace } from './stores.js';
     import { createEventDispatcher } from 'svelte';
     import Tabs from './Tabs.svelte';
+    import Welcome from './Welcome.svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -50,7 +51,7 @@
         <div class="p-8">
             {#each $results as place}
                 <div on:mouseenter={() => mouseIn(place)} on:mouseleave={mouseOut} on:click={() => mouseClick(place)}
-                    class="mb-2 pb-2 grid grid-cols-3 border-b-2"
+                    class="mb-2 pb-2 grid grid-cols-3 border-b-2 cursor-pointer hover:text-blue-500"
                     style="grid-template-columns: 6fr 4fr 1fr">
                     <div>
                         <h4 class="text-xl font-bold">{place.name}</h4>
@@ -61,7 +62,7 @@
                         <p>{place.telephone}</p>
                     </div>
                     <div class="flex justify-items-center items-center">
-                        <a href={place.url}>
+                        <a target="_blank" href={place.url}>
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                         </a>
                     </div>
@@ -69,9 +70,7 @@
             {/each}
         </div>
     {:else}
-        <div class="p-8">
-            <h2 class="text-3xl font-bold">Please select a County above.</h2>
-        </div>
+       <Welcome />
     {/if}
 </div>
 

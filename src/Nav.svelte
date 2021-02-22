@@ -25,7 +25,10 @@
     <!-- counties
     <hr class="-mt-2 mb-2 border-gray-400"/>-->
     <div class="flex mt-2">
-        <div><img src="../images/logo-no-text.png" alt="Logo" class="ml-12 h-16"></div>
+        <div>
+            <svg class="w-10 h-10 ml-12 mt-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            <!-- <img src="../images/logo-no-text.png" alt="Logo" class="ml-12 h-16"> -->
+        </div>
         <div class="flex-grow grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 justify-center px-12 pb-2 max-w-full text-center uppercase text-xs font-bold">
             {#each Counties as county}
                 <a href="#/" on:click={() => updateCounty(county)} 

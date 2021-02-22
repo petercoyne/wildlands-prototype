@@ -2,7 +2,7 @@
     import { activeTab } from './stores.js';
     import { slide } from 'svelte/transition';
 </script>
-<div class="sticky top-0 pt-2 max-w-full grid grid-cols-3 text-md font-bold bg-white border-gray-500 border-b-2 ">
+<div class="sticky top-0 pt-2 max-w-full grid grid-cols-3 text-md font-bold bg-white border-gray-500 border-b-2 bg-opacity-70" style="backdrop-filter: blur(8px);">
     <a href="#/" on:click={() => activeTab.set(0)} class="cursor-pointer p2 flex items-center justify-center">
         <svg class="w-8 h-8 text-blue-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
         <h2>Accommodation</h2>
