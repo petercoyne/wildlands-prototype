@@ -1,14 +1,14 @@
-export default [ "Antrim",
-"Armagh",
+export default [
+
 "Carlow",
 "Cavan",
 "Clare",
 "Cork",
-"Derry",
+
 "Donegal",
-"Down",
+
 "Dublin",
-"Fermanagh",
+
 "Galway",
 "Kerry",
 "Kildare",
@@ -23,10 +23,10 @@ export default [ "Antrim",
 "Monaghan",
 "Offaly",
 "Roscommon",
-"Sligo",
+
 "Tipperary",
-"Tyrone",
+
 "Waterford",
 "Westmeath",
 "Wexford",
-"Wicklow" ]
+]

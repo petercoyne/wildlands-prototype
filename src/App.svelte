@@ -1,12 +1,11 @@
 <script>
 	import { fade } from 'svelte/transition';
-	import * as animateScroll from "svelte-scrollto";
     import Tailwindcss from './Tailwindcss.svelte';
     import { results, activeTab, activeCounty } from './stores.js';
 	import Nav from './Nav.svelte';
 	import Map from './Map.svelte';
 	import List from './List.svelte';
-	
+
 	let mapComponent, listComponent, y;
 	let query = false;
 
@@ -63,6 +62,10 @@
 		mapComponent.closePlace();
 	}
 
+	function scrollTop() {
+		y = 0;
+	}
+
 </script>
 
 <svelte:window bind:scrollY={y}/>
@@ -75,7 +78,7 @@
 			<Map lat={53.2734} lon={-7.7783} zoom={6} bind:this={mapComponent} />
 		</div>
 		{#if y > 128}
-			<div transition:fade class="flex fixed bottom-4 left-4 p-8 cursor-pointer" on:click={() => animateScroll.scrollToTop()}>
+			<div transition:fade class="flex fixed bottom-4 left-4 p-8 cursor-pointer" on:click={scrollTop}>
 				<svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
 				<h5 class="text-xl ">Scroll to top</h5>
 			</div>

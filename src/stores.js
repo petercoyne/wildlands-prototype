@@ -8,3 +8,4 @@ export const zoom = writable(7);
 export const results = writable(false);
 export const activeTab = writable(0);
 export const activeItem = writable(false);
+export const y = writable(0);
