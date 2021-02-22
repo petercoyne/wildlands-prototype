@@ -27,13 +27,12 @@
 
     function closePlace() {
         activePlace.set(false);
-        console.log("List: closing place");
         dispatch("closePlace");
     }
 
 </script>
 
-<div class="overflow-y-scroll max-h-full min-h-0 relative">
+<div class="overflow-y-scroll max-h-full min-h-full relative">
 
     {#if $activePlace}
         <div class="p-8">

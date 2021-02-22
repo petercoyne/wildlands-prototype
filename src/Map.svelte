@@ -1,7 +1,7 @@
 <script>
 	import { onMount, setContext, createEventDispatcher } from 'svelte';
 	import { mapbox, key } from './mapbox.js';
-	import { results, mapReady,  activePage, activeCounty } from './stores.js';
+	import { results, mapReady,  activePage, activeCounty, activePlace } from './stores.js';
 
 	const dispatch = createEventDispatcher();
 
@@ -55,9 +55,13 @@
 		data.forEach(result => {
 			let el = document.createElement('div');
 				el.className = 'marker border-blue-500 border-4';
+				el.addEventListener('click', event => {
+					activePlace.set(result);
+					zoomTo(result.geo.longitude, result.geo.latitude);
+				});
 			let marker = new mapbox.Marker(el).setLngLat([result.geo.longitude, result.geo.latitude]).addTo(map)
-			.setPopup(new mapbox.Popup({ offset: 25 }) // add popups
-    		.setHTML('<h3>' + result.name + '</h3><p>' + result.url + '</p>'));
+			// .setPopup(new mapbox.Popup({ offset: 25 }) // add popups
+    		// .setHTML('<h3>' + result.name + '</h3><p>' + result.url + '</p>'));
 			markers.push(marker);
 		});
 	}
@@ -70,7 +74,6 @@
 		let bounds = new mapbox.LngLatBounds();
 
 		if (results.length > 0) {
-			console.log("length")
 			results.forEach(function(place) {
 				let ll = new mapbox.LngLat(place.geo.longitude, place.geo.latitude);
 				bounds.extend(ll)
