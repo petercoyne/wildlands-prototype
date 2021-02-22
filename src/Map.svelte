@@ -21,6 +21,7 @@
 	let map;
 	let markers = [];
 	let highlightMarker = false;
+	let currentBounds;
 
 	export function placeMarker(lng, lat) {
 		let el = document.createElement('div');
@@ -31,6 +32,22 @@
 	export function removeMarker() {
 		if (highlightMarker) {
 			highlightMarker.remove();
+		}
+	}
+	
+	export function zoomTo(lng, lat) {
+		if (highlightMarker) {
+			highlightMarker.remove();
+		}
+		map.flyTo({
+			center: [ lng, lat ],
+			zoom: 14
+		});
+	}
+
+	export function closePlace() {
+		if (currentBounds) {
+			map.fitBounds(currentBounds);
 		}
 	}
 
@@ -51,7 +68,7 @@
 
 	export function fitBounds(results) {
 		let bounds = new mapbox.LngLatBounds();
-		
+
 		if (results.length > 0) {
 			console.log("length")
 			results.forEach(function(place) {
@@ -60,8 +77,8 @@
 			});
 		}
 		if (bounds) {
-			console.log(bounds);
 			map.fitBounds(bounds);
+			currentBounds = bounds;
 		}
 	}
 
