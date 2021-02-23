@@ -48,7 +48,7 @@
 	}
 	
 	function highlight(event) {
-		mapComponent.placeMarker(event.detail.lng, event.detail.lat) // this is triggered when mouse is over one of the list items
+		mapComponent.placeMarker(event.detail.lng, event.detail.lat) // this is triggered from List when mouse is over one of the items
 	}
 
 	function unHighlight() {
@@ -69,7 +69,8 @@
 
 </script>
 
-<svelte:window bind:scrollY={y}/>
+<svelte:window bind:scrollY={y} />
+
 <Tailwindcss />
 
 <div class="">
@@ -89,7 +90,3 @@
 		</div>
 	</div>
 </div>
-<!-- <div class="block md:hidden pt-12">
-	<Logo />
-	<h1 class="text-3xl font-bold p-12 text-center">WildLands requires a tablet or desktop to use</h1>
-</div> -->

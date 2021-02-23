@@ -7,7 +7,7 @@
 
 	const dispatch = createEventDispatcher();
 
-    function mouseIn(place) {
+    function mouseIn(place) { // when mouse hovers over a place, send out a message with the coordinates of the place
 		dispatch('highlight', {
 			lng: place.geo.longitude,
             lat: place.geo.latitude
@@ -18,12 +18,12 @@
         dispatch("unhighlight");
     }
 
-    function mouseClick(place) {
+    function mouseClick(place) { // send out "zoomTo" message on clicking a place
         dispatch("zoomTo", {
 			lng: place.geo.longitude,
             lat: place.geo.latitude
 		});
-        activePlace.set(place);
+        activePlace.set(place); // set the activePlace global variable to the contents of place
     }
 
     function closePlace() {
@@ -34,22 +34,24 @@
 </script>
 
 <div class="relative">
-    {#if $activePlace}
+
+    {#if $activePlace} <!-- if there's an active place, show it first -->
         <div class="py-8 sticky top-0 mt-8 z-10 bg-white border-b-2" transition:slide>
-            <a href="#/" on:click={closePlace} class="text-red-500 float-right p-4 pr-0">
+            <a href="#/" on:click={closePlace} class="text-red-500 float-right p-4 pr-0"> <!-- close button -->
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </a>
-            <h2 class="text-3xl font-bold">{$activePlace.name}</h2>
-            <p class="mb-4">{$activePlace.address.addressLocality}</p>
-            {#each $activePlace.tags as tag}
+            <h2 class="text-3xl font-bold">{$activePlace.name}</h2> <!-- name -->
+            <p class="mb-4">{$activePlace.address.addressLocality}</p> <!-- address locality -->
+            {#each $activePlace.tags as tag} <!-- loop through tags -->
                 <span class="bg-gray-500 text-white font-bold rounded p-2 mr-2 mb-2 text-xs inline-block">{tag}</span>
             {/each}
         </div>
     {/if}
-    {#if $results}
-        <Tabs />
+
+    {#if $results} <!-- if we have a list of places, display them here -->
+        <Tabs /> <!-- Tabs component -->
         <div class="pt-4">
-            {#each $results as place}
+            {#each $results as place} <!-- loop through places and render list items -->
                 <div on:mouseenter={() => mouseIn(place)} on:mouseleave={mouseOut} on:click={() => mouseClick(place)}
                     class="mb-2 pb-2 flex justify-between border-b-2 cursor-pointer hover:text-blue-500">
                     <div>
@@ -75,7 +77,7 @@
             {/each}
         </div>
     {:else}
-       <Welcome />
+       <Welcome /> <!-- if we have no list of places, display the welcome message -->
     {/if}
 </div>
 
